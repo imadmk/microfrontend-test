@@ -1,8 +1,8 @@
-import { mount } from 'marketing/MarketingApp';
+import { mount } from 'auth/AuthApp';
 import React, { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
-export default () => {
+export default ({ onSignIn }: { onSignIn: () => void }) => {
   const ref = useRef(null);
   const history = useHistory();
 
@@ -15,6 +15,9 @@ export default () => {
           // prevent infinite loop
           history.push(nextPathname);
         }
+      },
+      onSignIn: () => {
+        onSignIn();
       }
     });
 

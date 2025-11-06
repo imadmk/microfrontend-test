@@ -6,17 +6,20 @@ const packageJson = require('../package.json');
 
 const devConfig = {
   mode: 'development',
+  // Specify publicPath to avoid main.js fetching problem on nested routes, because by default webpack use relative path to the nested routes
+  output: {
+    publicPath: 'http://localhost:8080/',
+  },
   devServer: {
     port: 8080,
-    historyApiFallback: {
-      index: 'index.html',
-    },
+    historyApiFallback: true,
   },
   plugins: [
     new ModuleFederationPlugin({
       name: 'container',
       remotes: {
         marketing: 'marketing@http://localhost:8081/remoteEntry.js',
+        auth: 'auth@http://localhost:8082/remoteEntry.js',
       },
       shared: packageJson.dependencies,
     }),
