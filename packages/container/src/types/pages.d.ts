@@ -24,3 +24,9 @@ declare module 'auth/AuthApp' {
       onParentNavigate: (data: { pathname: string }) => void;
     };
 }
+
+declare module 'dashboard/DashboardApp' {
+  export const mount: (
+    element: HTMLElement | null
+  ) => void;
+}
